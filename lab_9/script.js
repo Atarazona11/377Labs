@@ -125,6 +125,14 @@ function initChart(chart) {
   );
 }
 
+async function getData() {
+  const url = 'https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json'; // remote URL! you can test it in your browser
+  const data = await fetch(url); // We're using a library that mimics a browser 'fetch' for simplicity
+  const json = await data.json(); // the data isn't json until we access it using dot notation
+  const reply = json.filter((item) => Boolean(item.geocoded_column_1)).filter((item) => Boolean(item.name));
+  return reply;
+}
+
 async function mainEvent() {
   /*
         ## Main Event
@@ -142,6 +150,8 @@ async function mainEvent() {
   const chartTarget = document.getElementById('#myChart');
   submit.style.display = 'none'; // let your submit button disappear
 
+  initChart(chartTarget);
+  const chartData = await getData();
   /*
         Let's get some data from the API - it will take a second or two to load
         This next line goes to the request for 'GET' in the file at /server/routes/foodServiceRoutes.js
@@ -149,8 +159,6 @@ async function mainEvent() {
        */
   const results = await fetch('/api/foodServicePG');
   const arrayFromJson = await results.json(); // here is where we get the data from our request as JSON
-    
-  initChart(chartTarget);
   /*
         Below this comment, we log out a table of all the results using "dot notation"
         An alternate notation would be "bracket notation" - arrayFromJson["data"]
@@ -168,7 +176,7 @@ async function mainEvent() {
   console.log(`${arrayFromJson.data[0].name} ${arrayFromJson.data[0].category}`);
     
   // This IF statement ensures we can't do anything if we don't have information yet
-  if (arrayFromJson.data?.length > 0) {
+  if (chartData.length > 0) {
     submit.style.display = 'block'; // let's turn the submit button back on by setting it to display as a block when we have data available
     
     // Let's hide the load button now that we have some data to manipulate
