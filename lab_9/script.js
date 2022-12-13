@@ -151,6 +151,7 @@ async function mainEvent() {
   submit.style.display = 'none'; // let your submit button disappear
 
   initChart(chartTarget);
+  
   const chartData = await getData();
   /*
         Let's get some data from the API - it will take a second or two to load
