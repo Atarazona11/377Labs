@@ -103,7 +103,7 @@ async function mainEvent() {
     It's at about line 27 - go have a look and see what we're retrieving and sending back.
    */
   const results = await getData();
-  const arrayFromJson = await results.json();
+  const arrayFromJson = await json();
   // const arrayFromJson = await results(); // here is where we get the data from our request as JSON
 
   /*
