@@ -103,7 +103,7 @@ async function mainEvent() {
     It's at about line 27 - go have a look and see what we're retrieving and sending back.
    */
   const results = await getData();
-  const arrayFromJson = await json();
+  //const arrayFromJson = await json();
   // const arrayFromJson = await results(); // here is where we get the data from our request as JSON
 
   /*
@@ -116,15 +116,15 @@ async function mainEvent() {
 
   // in your browser console, try expanding this object to see what fields are available to work with
   // for example: arrayFromJson.data[0].name, etc
-  console.log(arrayFromjson.data[0]);
+  console.log(results.data[0]);
   // console.log(arrayFromJson.data[0]);
 
   // this is called "string interpolation" and is how we build large text blocks with variables
-  console.log(`${arrayFromJson.data[0].name} ${arrayFromJson.data[0].category}`);
+  console.log(`${results.data[0].name} ${results.data[0].category}`);
   // console.log(`${arrayFromJson.data[0].name} ${arrayFromJson.data[0].category}`);
 
   // This IF statement ensures we can't do anything if we don't have information yet
-  if (arrayFromJson.data? > 0) { // the question mark in this means "if this is set at all"
+  if (results.length > 0) { // the question mark in this means "if this is set at all"
   // if (arrayFromJson.data?.length > 0) { // the question mark in this means "if this is set at all"
     submit.style.display = 'block'; // let's turn the submit button back on by setting it to display as a block when we have data available
 
@@ -139,7 +139,7 @@ async function mainEvent() {
       submitEvent.preventDefault();
 
       // This constant will have the value of your 15-restaurant collection when it processes
-      const restaurantList = processRestaurants(arrayFromJson.data);
+      const restaurantList = processRestaurants(results);
       console.log(restaurantList);
 
       // And this function call will perform the "side effect" of injecting the HTML list for you
