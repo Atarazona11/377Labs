@@ -116,11 +116,11 @@ async function mainEvent() {
 
   // in your browser console, try expanding this object to see what fields are available to work with
   // for example: arrayFromJson.data[0].name, etc
-  console.log(restoData[0]);
+  console.log(restoData.data[0]);
   // console.log(arrayFromJson.data[0]);
 
   // this is called "string interpolation" and is how we build large text blocks with variables
-  console.log(`${restoData[0].name} ${restoData[0].category}`);
+  console.log(`${restoData.data[0].name} ${restoData.data[0].category}`);
   // console.log(`${arrayFromJson.data[0].name} ${arrayFromJson.data[0].category}`);
 
   // This IF statement ensures we can't do anything if we don't have information yet
@@ -139,7 +139,7 @@ async function mainEvent() {
       submitEvent.preventDefault();
 
       // This constant will have the value of your 15-restaurant collection when it processes
-      const restaurantList = processRestaurants(restoData);
+      const restaurantList = processRestaurants(restoData.data);
       console.log(restaurantList);
 
       // And this function call will perform the "side effect" of injecting the HTML list for you
