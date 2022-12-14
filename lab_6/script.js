@@ -103,7 +103,7 @@ async function mainEvent() {
     It's at about line 27 - go have a look and see what we're retrieving and sending back.
    */
   const results = await getData;
-  const arrayFromJson = await results(); // here is where we get the data from our request as JSON
+  // const arrayFromJson = await results(); // here is where we get the data from our request as JSON
 
   /*
     Below this comment, we log out a table of all the results using "dot notation"
@@ -115,13 +115,16 @@ async function mainEvent() {
 
   // in your browser console, try expanding this object to see what fields are available to work with
   // for example: arrayFromJson.data[0].name, etc
-  console.log(arrayFromJson.data[0]);
+  console.log(results[0]);
+  // console.log(arrayFromJson.data[0]);
 
   // this is called "string interpolation" and is how we build large text blocks with variables
-  console.log(`${arrayFromJson.data[0].name} ${arrayFromJson.data[0].category}`);
+  console.log(`${results[0].name} ${results[0].category}`);
+  // console.log(`${arrayFromJson.data[0].name} ${arrayFromJson.data[0].category}`);
 
   // This IF statement ensures we can't do anything if we don't have information yet
-  if (arrayFromJson.data?.length > 0) { // the question mark in this means "if this is set at all"
+  if (results > 0) { // the question mark in this means "if this is set at all"
+  // if (arrayFromJson.data?.length > 0) { // the question mark in this means "if this is set at all"
     submit.style.display = 'block'; // let's turn the submit button back on by setting it to display as a block when we have data available
 
     // Let's hide the load button now that we have some data to manipulate
