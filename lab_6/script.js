@@ -87,7 +87,7 @@ async function mainEvent() {
   /*
         ## Main Event
       */
-  // const map = initMap();
+  const map = initMap();
 
   // the async keyword means we can make API requests
   const form = document.querySelector('.main_form'); // get your main form so you can do JS with it
@@ -126,8 +126,8 @@ async function mainEvent() {
       if (!currentArray.length) { return; }
 
       // Debug logging to make sure the code is doing what we think it is
-      // console.log(evenet.target.value);
-      // console.log(currentArray);
+      console.log(evenet.target.value);
+      console.log(currentArray);
 
       const restarants = currentArray
         .filter((item) => {
