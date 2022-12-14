@@ -103,8 +103,10 @@ async function mainEvent() {
   const chartTarget = document.getElementById('#myChart');
   submit.style.display = 'none'; // let your submit button disappear
 
-  initChart(chartTarget);
+  
   const chartData = await getData();
+  const shapedData = shapeDataForLinceChart(chartData);
+  const myChart = initChart(chartTarget, shapedData);
   /* API Data request */
 
 
@@ -126,24 +128,28 @@ async function mainEvent() {
       // markerPlace(currentList, pageMap);
     });
 
-    form.addEventListener('input', (event) => {
-      console.log(event.target.value);
-      const filteredList = filterList(currentList, event.target.value);
-      injectHTML(filteredList);
-      markerPlace(filteredList, pageMap);
-    });
+    restoName.addEventListener('input', (event) => {
+      if (!currentArray.length) { return; }
+
+      // Debug logging to make sure the code is doing what we think it is
+      // console.log(evenet.target.value);
+      // console.log(currentArray);
+
+      const restarants = currentArray
+        .filter((item) => {
+          const lowerCaseName = item.name.toLowerCase();
+          const lowerCaseQuery = event.target.value.toLowerCase();
+          return lowerCaseName.includes(lowerCaseQuery);
+        })
+        .filter((item) => Boolean(item.geocoded_column_1));
   
-    // And here's an eventListener! It's listening for a "submit" button specifically being clicked
-    // this is a synchronous event event, because we already did our async request above, and waited for it to resolve
-    
-    
-      // By separating the functions, we open the possibility of regenerating the list
-      // without having to retrieve fresh data every time
-      // We also have access to some form values, so we could filter the list based on name
+      if (restaurants.lenfth > 0) {
+        injectHTML(restuarants);
+
+        markerPlace(restaurants, map);
+      }
+    });
   }
-/*
-      This last line actually runs first!
-      It's calling the 'mainEvent' function at line 57
-      It runs first because the listener is set to when your HTML content has loaded
-    */
+}
+
 document.addEventListener('DOMContentLoaded', async () => mainEvent()); // the async keyword means we can make API request
