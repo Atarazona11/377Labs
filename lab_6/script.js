@@ -87,7 +87,7 @@ async function mainEvent() {
   /*
         ## Main Event
       */
-  const map = await getData();
+  // const map = initMap();
 
   // the async keyword means we can make API requests
   const form = document.querySelector('.main_form'); // get your main form so you can do JS with it
@@ -97,14 +97,14 @@ async function mainEvent() {
   const chartTarget = document.getElementById('#myChart');
   submit.style.display = 'none'; // let your submit button disappear
 
-  
-  const chartData = await getData();
-  const shapedData = shapeDataForLinceChart(chartData);
-  const myChart = initChart(chartTarget, shapedData);
+  // const chartData = await getData();
+  // const shapedData = shapeDataForLinceChart(chartData);
+  // const myChart = initChart(chartTarget, shapedData);
+
+  const results = await getData();
   /* API Data request */
 
-
-  if (chartData.length > 0) {
+  if (results.length > 0) {
     submit.style.display = 'block'; // let's turn the submit button back on by setting it to display as a block when we have data available
 
     loadAnimation.classList.remove('lds-ellipsis');
@@ -115,7 +115,6 @@ async function mainEvent() {
       submitEvent.preventDefault();
       currentList = processRestaurants(chartData);
     
-
       const restaurants = currentArray.filter((item) => Boolean(item.geocoded_column_1));
       // And this function call will perform the "side effect" of injecting the HTML list for you
       injectHTML(restaurants);
