@@ -102,7 +102,7 @@ async function mainEvent() {
     This next line goes to the request for 'GET' in the file at /server/routes/foodServiceRoutes.js
     It's at about line 27 - go have a look and see what we're retrieving and sending back.
    */
-  const results = await getData;
+  const results = await getData();
   // const arrayFromJson = await results(); // here is where we get the data from our request as JSON
 
   /*
@@ -115,15 +115,15 @@ async function mainEvent() {
 
   // in your browser console, try expanding this object to see what fields are available to work with
   // for example: arrayFromJson.data[0].name, etc
-  console.log(results[0]);
+  console.log(json[0]);
   // console.log(arrayFromJson.data[0]);
 
   // this is called "string interpolation" and is how we build large text blocks with variables
-  console.log(`${results[0].name} ${results[0].category}`);
+  console.log(`${reply[0].name} ${reply[0].category}`);
   // console.log(`${arrayFromJson.data[0].name} ${arrayFromJson.data[0].category}`);
 
   // This IF statement ensures we can't do anything if we don't have information yet
-  if (results > 0) { // the question mark in this means "if this is set at all"
+  if (json > 0) { // the question mark in this means "if this is set at all"
   // if (arrayFromJson.data?.length > 0) { // the question mark in this means "if this is set at all"
     submit.style.display = 'block'; // let's turn the submit button back on by setting it to display as a block when we have data available
 
