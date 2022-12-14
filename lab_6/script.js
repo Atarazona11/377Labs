@@ -87,7 +87,7 @@ async function mainEvent() {
   /*
         ## Main Event
       */
-  const map = initMap();
+  const map = await getData();
 
   // the async keyword means we can make API requests
   const form = document.querySelector('.main_form'); // get your main form so you can do JS with it
